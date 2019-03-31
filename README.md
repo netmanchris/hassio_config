@@ -14,5 +14,5 @@ Subscribe to my youtube channel at https://www.youtube.com/chrisyoungsmarthome f
 - Abode Security System
 - Aerogarden Hydroponic Garden
 - Nest Protect Smoke/Co2 Detector
-
+- Foobot Air Quality Sensors
 
