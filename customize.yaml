@@ -1,0 +1,44 @@
+
+#section for foobot to appear in homekit properly
+sensor.foobot_blueair_aware_humidity:
+  device_class: humidity
+sensor.foobot_blueair_aware_pm2_5:
+  device_class: pm25
+
+sensor.foobot_happybot_humidity:
+  device_class: humidity
+sensor.foobot_happybot_pm2_5:
+  device_class: pm25
+  
+sensor.foobot_happybot_voc:
+  device_class: co2
+sensor.foobot_blueair_aware_voc:
+  device_class: co2
+
+
+#section for Nest Protect to appear in homekit properly  
+sensor.basement_nest_protect_co_status:
+  device_class: co2
+sensor.basement_nest_protect_smoke_status:
+  device_class: co2
+
+
+#section for Awair devices to appear in homekit properly  
+sensor.omni_chemicals_tvocs:
+  device_class: co2
+sensor.omni_particulate_matter:
+  device_class: pm25
+
+sensor.glow_chemicals_tvocs:
+ device_class: co2
+
+sensor.awair1_chemicals_tvocs:
+ device_class: co2
+sensor.awair1_particulate_matter:
+ device_class: pm25
+
+sensor.awair2_chemicals_tvocs:
+ device_class: co2
+sensor.awair2_particulate_matter:
+ device_class: pm25
+  

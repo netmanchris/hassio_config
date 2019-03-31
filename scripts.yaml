@@ -1,0 +1,9 @@
+alexa_announce_example:
+  sequence:
+    - service: notify.alexa_media
+      data:
+        target: media_player.christopher_young_s_echo_dot
+        message: "This is an example of an announcement"
+        data:
+          type: announce
+          method: all # or speak or show
