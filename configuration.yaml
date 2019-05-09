@@ -25,6 +25,8 @@ introduction:
 
 # Discover some devices automatically
 discovery:
+  enable:
+    - homekit
 
 # Sensors
 sensor:
@@ -35,7 +37,7 @@ sensor:
     token: !secret foobot_token
     username: !secret foobot_username
 
-  - platform: awair
+  - platform: awair_cust
     token: !secret awair_token
     name: Glow
     monitored_conditions:
@@ -44,7 +46,7 @@ sensor:
       - co2
       - chemicals
     refresh_rate: 15
-  - platform: awair
+  - platform: awair_cust
     token: !secret awair_token
     name: Awair2
     monitored_conditions:
@@ -54,7 +56,7 @@ sensor:
       - chemicals
       - dust
     refresh_rate: 15
-  - platform: awair
+  - platform: awair_cust
     token: !secret awair_token
     name: Omni
     monitored_conditions:
@@ -64,7 +66,7 @@ sensor:
       - chemicals
       - dust
     refresh_rate: 15
-  - platform: awair
+  - platform: awair_cust
     token: !secret awair_token
     name: Awair1
     monitored_conditions:
@@ -85,6 +87,11 @@ dyson:
   username: !secret dyson_username
   password: !secret dyson_password
   language: CA
+  devices:
+    - device_id: PT3-CA-JMA3143A #Dyson Hot Cool Office
+      device_ip: 10.101.0.129
+    - device_id: NA7-US-HMA0563A  #Dyson Fan Master Bedroom
+      device_ip: 10.101.0.121
 
 nest:
   client_id: !secret nest_client_id
@@ -111,18 +118,56 @@ binary_sensor:
 camera:
   - platform: ring  
 
+light:
+  - platform: osramlightify
+    host: 10.101.0.176
+
+point:
+  client_id: !secret minut_clientid
+  client_secret: !secret minut_clientsecret
+
 
 alexa_media:
   accounts:
     - email: !secret amazon_username
       password: !secret amazon_password
-      url: amazon.com  
+      url: amazon.ca  
       
 notify:
   - platform: alexa_media
     name: alexa_media
+
     
 homekit:
+  autostart: false
+  filter:
+    include_domains:
+      - light
+      - binary_sensor
+      - sensor
+      - climate
+      - fan
+    include_entities:
+      - light.eve_light_strip_8606
+    exclude_entities:
+      - binary_sensor.keyfob
+      - binary_sensor.qa_notification
+      - binary_sensor.remote_ui
+      - binary_sensor.ring_front_doorbell_ding
+      - light.nanoleaf_left
+      - light.nanoleaf_right
+      - script.alexa_announce_example
+      - script.test_tts
+      - sensor.basement_nest_protect_battery_health
+      - sensor.basement_nest_protect_color_status
+      - binary_sensor.qa_notification
+      - binary_sensor.home_away
+      - binary_sensor.hallway_point_tamper
+      - binary_sensor.hallway_point_heat
+      - binary_sensor.hallway_point_dry
+      - binary_sensor.hallway_point_connectivity
+      - binary_sensor.hallway_point_cold
+      - binary_sensor.hallway_point_battery
 
 panel_iframe:
   configurator:
@@ -130,7 +175,8 @@ panel_iframe:
     icon: mdi:wrench
     url: http://hassio.local:3218
     
-    
+ 
+
 recorder:
   purge_keep_days: 5
   exclude:
@@ -145,4 +191,4 @@ recorder:
       
 group: !include groups.yaml
 automation: !include automations.yaml
-script: !include scripts.yaml
+script: !include_dir_merge_named script
